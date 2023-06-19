@@ -49,7 +49,7 @@
             <a class="btn btn-success" href="/printer/edit/pi" translate>Edit Raspberry Pi Settings</a>
             <br>
             {% endif %}
-            <a class="btn btn-danger" href="/printer/distro/change" translate>Change Distribution</a>
+            <a class="btn btn-danger expertMode" href="/printer/distro/change" translate>Change Distribution</a>
             <br>
             <a class="btn btn-success" href="/printer/upgrade" translate>Upgrade nanoDLP</a>
             <br>
@@ -67,8 +67,8 @@
             <br>
             {% endif %}            
             <a class="btn btn-success" href="/printer/upgrade/dsi/nanodlp-dsi.beta.tar.gz" translate>Upgrade DSI interface</a>
-            <h1 translate>Upload AVR Firmware</h1>
-            <form action="/avr/upload" method="post" class="edit-page" enctype="multipart/form-data">
+            <h1 class="expertMode" translate>Upload AVR Firmware</h1>
+            <form action="/avr/upload" method="post" class="edit-page expertMode" enctype="multipart/form-data">
                 <input class="form-control" name="HexFile" id="HexFile" type="file" accept=".hex">
                 <br>
                 <button type="submit" class="btn btn-success" name="file" value="add" translate>Upload</button>

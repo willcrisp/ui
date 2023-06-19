@@ -10,11 +10,11 @@
 			<div class="col-md-12 setup-categories profiles">
 				{{ setting_cat("<translate>Basic Details</translate>","<translate>Resin name, price, description</translate>",gear_icon,"i_basic") }}
 				{{ setting_cat("<translate>Slicer Options</translate>","<translate>Prepare models for print, erode, dimming, 3D AA, AA, resolution, dimming, hollowing, mask</translate>", glob_icon, "i_slicing") }}
-				{{ setting_cat("<translate>Before Layer</translate>","<translate>Move to layer, movement speed, slow section, sending code</translate>",axis_icon,"i_movetolayer") }}
+				{{ setting_cat("<translate>Before Layer</translate>","<translate>Move to layer, movement speed, slow section, sending code</translate>",axis_icon,"i_movetolayer","expertMode") }}
 				{{ setting_cat("<translate>Burn-in Layer</translate>","<translate>Burin-in layers count, cure time, lift, erode</translate>",burnin_icon,"i_burnin") }}
 				{{ setting_cat("<translate>Normal Layer</translate>","<translate>Normal layers count, cure time, lift, erode</translate>",normal_icon,"i_normal") }}
 				{{ setting_cat("<translate>After Layer</translate>","<translate>Lift after print, wait after lift, sending code</translate>",axis_icon,"i_moveafterprint") }}
-				{{ setting_cat("<translate>Override Machine Settings</translate>","<translate>Resolution, codes, mask</translate>",pen_icon,"i_override") }}
+				{{ setting_cat("<translate>Override Machine Settings</translate>","<translate>Resolution, codes, mask</translate>",pen_icon,"i_override","expertMode") }}
 			</div>
 			<div class="col-md-12 selected-cat">	
 			</div>
@@ -45,7 +45,7 @@
 				<label for="Desc" translate>Description</label>
 				<textarea class="form-control" name="Desc" id="Desc">{{profile.Desc}}</textarea>
 			</div>
-			<div class="col-md-4 i_moveafterprint i_option conditional" data-condition="#PrinterType != 2 && ['i_moveafterprint'].includes(#scategory)">
+			<div class="col-md-4 i_moveafterprint i_option conditional expertMode" data-condition="#PrinterType != 2 && ['i_moveafterprint'].includes(#scategory)">
 				<label for="ShieldAfterLayer">
 					<translate>Code After Each Layer</translate> {{helpPage("https://docs.nano3dtech.com/manual/code/")}}
 					{{formulaModal()}}
@@ -84,7 +84,7 @@
 				<input class="form-control" value="{{profile.SupportWaitAfterPrint}}" name="SupportWaitAfterPrint"
 					step="0.01" id="SupportWaitAfterPrint" type="number" required>
 			</div>
-			<div class="col-md-4 i_slicing i_option">
+			<div class="col-md-4 i_slicing i_option expertMode">
 				<label for="AdaptSlicing">
 					<translate>Adaptive Thickness</translate> {{helpPage("https://docs.nano3dtech.com/manual/adaptive-thickness/")}} {{regenerateRequired()}}
 				</label>
@@ -107,7 +107,7 @@
 				</label>
 				<input class="form-control" value="{{profile.AdaptSlicingMax}}" name="AdaptSlicingMax" id="AdaptSlicingMax" step="1" type="number">
 			</div>
-			<div class="col-md-4 i_slicing i_option">
+			<div class="col-md-4 i_slicing i_option expertMode">
 				<label for="AntiAlias3D">
 					<translate>3D Anti-aliasing</translate> {{helpPage("https://docs.nano3dtech.com/manual/aa-3d/")}} {{regenerateRequired()}}
 				</label>
@@ -125,14 +125,14 @@
 					<option value="1" {% if profile.AntiAlias==1 %}selected{% endif %} translate>Disable</option>
 				</select>
 			</div>
-			<div class="col-md-4 i_slicing i_option">
+			<div class="col-md-4 i_slicing i_option expertMode">
 				<label for="AntiAliasThreshold">
 					<translate>Anti-aliasing Minimum Light Intensity Threshold</translate> <span class="label label-default">%</span> {{helpPage("https://docs.nano3dtech.com/manual/print-quality/#anti-aliasing-threshold")}}{{regenerateRequired()}}
 				</label>
 				<input class="form-control" value="{{profile.AntiAliasThreshold}}" name="AntiAliasThreshold" id="AntiAliasThreshold" step="0.1"
 					min="0" max="100" type="number">
 			</div>
-			<div class="col-md-4 i_slicing i_option">
+			<div class="col-md-4 i_slicing i_option expertMode">
 				<label for="SupportOffset">
 					<translate>Burn-in Erode / Dilate Areas</translate>
 					<span class="label label-default" translate>MM</span> {{helpPage("https://docs.nano3dtech.com/manual/erode/")}} {{regenerateRequired()}}
@@ -156,7 +156,7 @@
 				<input class="form-control" value="{{profile.CureTime}}" name="CureTime" id="CureTime" step="0.0001"
 					type="number" required>
 			</div>
-			<div class="col-md-4 i_normal i_option">
+			<div class="col-md-4 i_normal i_option expertMode">
 				<label for="DynamicWait">
 					<translate>Dynamic Wait</translate>
 					<span class="label label-danger" translate>Experimental</span>
@@ -166,7 +166,7 @@
 				<textarea class="form-control" name="DynamicWait"
 					id="DynamicWait">{{profile.DynamicWait}}</textarea>
 			</div>
-			<div class="col-md-4 i_normal i_option">
+			<div class="col-md-4 i_normal i_option expertMode">
 				<label for="DynamicLift">
 					<translate>Dynamic Lift</translate>
 					<span class="label label-danger" translate>Experimental</span>
@@ -192,7 +192,7 @@
 				<input class="form-control" value="{{profile.WaitAfterPrint}}" name="WaitAfterPrint" id="WaitAfterPrint"
 					step="0.01" type="number" required>
 			</div>
-			<div class="col-md-4 i_slicing i_option">
+			<div class="col-md-4 i_slicing i_option expertMode">
 				<label for="Offset">
 					<translate>Erode / Dilate Areas</translate>
 					<span class="label label-default" translate>MM</span> {{helpPage("https://docs.nano3dtech.com/manual/erode/")}} {{regenerateRequired()}}
@@ -200,7 +200,7 @@
 				<input class="form-control" value="{{profile.Offset}}" name="Offset" id="Offset" step="0.001"
 					type="number">
 			</div>
-			<div class="col-md-4 i_normal i_option">
+			<div class="col-md-4 i_normal i_option expertMode">
 				<label for="DynamicCureTime">
 					<translate>Dynamic Cure Time</translate>
 					<span class="label label-default"
@@ -210,7 +210,7 @@
 				<textarea class="form-control" name="DynamicCureTime"
 					id="DynamicCureTime">{{profile.DynamicCureTime}}</textarea>
 			</div>
-			<div class="col-md-4 i_movetolayer i_option">
+			<div class="col-md-4 i_movetolayer i_option expertMode">
 				<label for="ShieldBeforeLayer">
 					<translate>Code Before Each Layer</translate> {{helpPage("https://docs.nano3dtech.com/manual/code/")}}
 					{{formulaModal()}}
@@ -218,7 +218,7 @@
 				<textarea class="form-control" name="ShieldBeforeLayer"
 					id="ShieldBeforeLayer">{{profile.ShieldBeforeLayer}}</textarea>
 			</div>
-			<div class="col-md-4 i_movetolayer i_moveafterprint i_option">
+			<div class="col-md-4 i_movetolayer i_moveafterprint i_option expertMode">
 				<label for="DynamicSpeed">
 					<translate>Dynamic Speed</translate>
 					<span class="label label-default"
@@ -227,7 +227,7 @@
 				</label>
 				<textarea class="form-control" name="DynamicSpeed" id="DynamicSpeed">{{profile.DynamicSpeed}}</textarea>
 			</div>
-			<div class="col-md-4 i_moveafterprint i_option">
+			<div class="col-md-4 i_moveafterprint i_option expertMode">
 				<label for="SeparationDetection">
 					<translate>Separation Detection</translate>
 					{{helpPage("https://docs.nano3dtech.com/manual/code/#dynamic-fields")}}
@@ -237,7 +237,7 @@
 				<textarea class="form-control" name="SeparationDetection"
 					id="SeparationDetection">{{profile.SeparationDetection}}</textarea>
 			</div>
-			<div class="col-md-4 i_moveafterprint i_option">
+			<div class="col-md-4 i_moveafterprint i_option expertMode">
 				<label for="ResinLevelDetection">
 					<translate>Resin Level Detection</translate>
 					<span class="label label-danger" translate>Experimental</span>
@@ -247,7 +247,7 @@
 				<textarea class="form-control" name="ResinLevelDetection"
 					id="ResinLevelDetection">{{profile.ResinLevelDetection}}</textarea>
 			</div>
-			<div class="col-md-4 i_moveafterprint i_option">
+			<div class="col-md-4 i_moveafterprint i_option expertMode">
 				<label for="CrashDetection">
 					<translate>Crash Detection</translate>
 					<span class="label label-danger" translate>Experimental</span>
@@ -265,7 +265,7 @@
 				<input class="form-control" value="{{profile.TopWait}}" name="TopWait" id="TopWait" step="0.01"
 					type="number" required>
 			</div>			
-			<div class="col-md-4 i_movetolayer i_moveafterprint i_option">
+			<div class="col-md-4 i_movetolayer i_moveafterprint i_option expertMode">
 				<label for="ZStepWait">
 					<translate>Max Speed</translate>
 					<span class="label label-default" translate>mm/min (Direct Control: μm/Second) </span> {{helpPage("https://docs.nano3dtech.com/manual/speed/")}}
@@ -291,7 +291,7 @@
 					value="{% if profile.SlowSectionStepWait==0 %}1{% else %}{{profile.SlowSectionStepWait}}{% endif %}"
 					name="SlowSectionStepWait" id="SlowSectionStepWait" type="number" min="1" required>
 			</div>
-			<div class="col-md-4 i_slicing i_option">
+			<div class="col-md-4 i_slicing i_option expertMode">
 				<label for="FillColor">
 					<translate>Light Source Color</translate>  {{helpPage("https://docs.nano3dtech.com/manual/mask/#color")}}{{regenerateRequired()}}
 				</label>
@@ -300,7 +300,7 @@
 				{% else %}
 				<input class="form-control" value="#ffffff" name="FillColor" id="FillColor" type="color"> {% endif %}
 			</div>
-			<div class="col-md-4 i_slicing i_option">
+			<div class="col-md-4 i_slicing i_option expertMode">
 				<label for="BlankColor">
 					<translate>Blank Area Color</translate>  {{helpPage("https://docs.nano3dtech.com/manual/mask/#color")}}{{regenerateRequired()}}
 				</label>
@@ -309,7 +309,7 @@
 					type="color"> {% else %}
 				<input class="form-control" value="#000000" name="BlankColor" id="BlankColor" type="color"> {% endif %}
 			</div>
-			<div class="col-md-4 i_slicing i_option">
+			<div class="col-md-4 i_slicing i_option expertMode">
 				<label for="PixelDiming">
 					<translate>Pixel Dimming Type</translate> {{helpPage("https://docs.nano3dtech.com/manual/dimming/")}}{{regenerateRequired()}}
 				</label>
@@ -361,7 +361,7 @@
 					<option value="1" {% if profile.TransitionalLayer==1 %}selected{% endif %} translate>Disable</option>
 				</select>
 			</div>
-			<div class="col-md-4 i_slicing i_burnin i_option">
+			<div class="col-md-4 i_slicing i_burnin i_option expertMode">
 				<label for="ElephantType">
 					<translate>Elephant Foot Compensation</translate>{{regenerateRequired()}}
 				</label>
@@ -395,7 +395,7 @@
 				<input class="form-control" value="{{profile.ElephantLayers}}" name="ElephantLayers" id="ElephantLayers" step="1"
 					type="number">
 			</div>
-			<div class="col-md-4 i_slicing i_option">
+			<div class="col-md-4 i_slicing i_option expertMode">
 				<label for="HatchingType">
 					<translate>Hollowing / Infill Type</translate> {{helpPage("https://docs.nano3dtech.com/manual/hollowing/")}}{{regenerateRequired()}}
 				</label>
@@ -479,7 +479,7 @@
 				<input class="form-control" value="{{profile.WaitHeight}}" name="WaitHeight" id="WaitHeight"
 					step="0.001" type="number" required>
 			</div>
-			<div class="col-md-4 i_slicing i_option">
+			<div class="col-md-4 i_slicing i_option expertMode">
 				<label for="ImageRotate">
 					<translate>Rotate Layers</translate>{{regenerateRequired()}}
 				</label>
@@ -488,7 +488,7 @@
 					<option value="1" {% if profile.ImageRotate==1 %}selected{% endif %} translate>Rotate 90°</option>
 				</select>
 			</div>
-			<div class="col-md-4 i_slicing i_option">
+			<div class="col-md-4 i_slicing i_option expertMode">
 				<label for="MultiCureGap">
 					<translate>Multi Print Gap</translate> <span class="label label-default" translate>MM</span>
 					{{helpPage("https://docs.nano3dtech.com/manual/multicure/")}} {{regenerateRequired()}}
@@ -546,7 +546,7 @@
 				<input class="form-control" value="{{profile.ZResPerc}}" name="ZResPerc" id="ZResPerc" step="0.001"
 					type="number">
 			</div>
-			<div class="col-md-4 i_slicing i_override i_option">
+			<div class="col-md-4 i_slicing i_override i_option expertMode">
 				<label for="IgnoreMask">
 					<translate>Mask File</translate> {{helpPage("https://docs.nano3dtech.com/manual/mask/")}}{{regenerateRequired()}}
 				</label>
