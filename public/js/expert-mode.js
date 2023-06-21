@@ -10,7 +10,9 @@ if (expertModeCheck === null) {
 $(document).ready(function () {
   if (expertModeCheck) {
     $(".expertMode").removeClass("hidden");
+    $(".notExpertMode").addClass("hidden");
   } else {
+    $(".notExpertMode").removeClass("hidden");
     $(".expertMode").addClass("hidden");
   }
 });
@@ -22,7 +24,9 @@ $("#expertMode").change(function () {
 
   if (expertModeCheck) {
     $(".expertMode").removeClass("hidden");
+    $(".notExpertMode").addClass("hidden");
   } else {
+    $(".notExpertMode").removeClass("hidden");
     $(".expertMode").addClass("hidden");
   }
 });

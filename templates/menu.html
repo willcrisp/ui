@@ -49,14 +49,11 @@
             {% endif %}
         </li>
         {% endif %}
-        <li style="white-space: nowrap; padding:7px;">
-            <div class="row">
-                <input type="checkbox" value="" id="expertMode">
-                <label for="expertMode">
-                    Expert Mode
-                </label>
-            </input>
-            </div>
+        <li>
+        <div class="row" style="padding: 15px;">
+            <input type="checkbox" value="" id="expertMode" style="padding-top: 5px;"></input>
+            <span class="label label-info">Expert Mode</span>    
+        </div>
         </li>
         <li>
             {% if !manHighLock %}

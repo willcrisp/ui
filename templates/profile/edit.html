@@ -4,7 +4,7 @@
 	<div class="alert alert-danger" role="alert">{{msg}}</div>
 	{% endif %}
 	<input type="hidden" id="scategory" value="">
-	<form action="" method="post" class="edit-page" id="setup">
+	<form action="" method="post" class="edit-page expertMode" id="setup">
 		<br>
 		<div class="row">
 			<div class="col-md-12 setup-categories profiles">
@@ -578,6 +578,211 @@
 		{{ customInputs(inputs,profile.CustomValues,1)}}
 		<button type="submit" class="btn btn-success" translate>Save</button> &nbsp; 
 	</form>	
+	<form action="" method="post" class="edit-page notExpertMode" id="setup2">
+		<div class="row flex-row" id="options">
+			<div class="col-md-12 i_basic i_option">
+					<h3><span translate>Details</span>
+					<button type="submit" class="btn btn-success" translate>Save</button> 
+					</h3>
+			</div>
+			<div class="col-md-4 i_basic i_option">
+				<label for="ResinID" translate>Resin</label>
+				<select name="ResinID" id="ResinID" class="form-control">
+					<option value="0">-</option>
+					{% for p in resins %}
+						<option value="{{p.ID}}" {% if profile.ResinID == p.ID %}selected{% endif %}>{{p.Brand}} {{p.Model}}</option>
+					{% endfor %}
+				</select>				
+			</div>
+			<div class="col-md-4 i_basic i_option">
+				<label for="Title" translate>Name</label>
+				<input class="form-control" value="{{profile.Title}}" name="Title" id="Title" required>
+			</div>
+			<div class="col-md-4 i_basic i_option">
+				<label for="ResinPrice" translate>Price <b>($/L)</b></label>
+				<input class="form-control" value="{{profile.ResinPrice}}" name="ResinPrice" id="ResinPrice" type="number">
+			</div>			
+			<div class="col-md-4 i_basic i_option">
+				<label for="Desc" translate>Description</label>
+				<textarea class="form-control" name="Desc" id="Desc">{{profile.Desc}}</textarea>
+			</div>
+
+			<!-- Layer Detils -->
+			<div class="col-md-12 i_basic i_option" style="padding-top:30px;">
+				<div class="col-md-6 i_basic i_option" style="padding-left: 0px;">
+					<h5><span translate><strong>Layer Details</strong></span></h5>
+				</div>
+			</div>
+
+			<div class="col-md-4 i_basic i_option" style="padding-top:15px;">
+				<div class="col-md-6 i_normal i_option">
+					<label for="Depth"><translate>Layer Thickness <b>(μm)</b></translate></label>
+				</div>
+				<div class="col-md-6 i_normal i_option text-right">
+					<input class="form-control" value="{{profile.Depth}}" name="Depth" id="Depth" step="0.01" type="number" required>
+				</div>
+			</div>
+			<div class="col-md-4 i_basic i_option" style="padding-top:15px;">
+				<div class="col-md-6 i_burnin i_option">
+					<label for="SupportLayerNumber"><translate>Number of Burn-in Layers</translate></label>
+				</div>
+				<div class="col-md-6 i_burnin i_option">
+					<input class="form-control" value="{{profile.SupportLayerNumber}}" name="SupportLayerNumber" id="SupportLayerNumber" type="number" required>
+				</div>
+			</div>
+			<div class="col-md-4 i_basic i_option" style="padding-top:15px;">
+				<div class="col-md-6 i_burnin i_option">
+					<label for="TransitionalLayer"><translate>Transitional Layer</translate></label>
+				</div>
+				<div class="col-md-6 i_burnin i_option">
+					<select name="TransitionalLayer" id="TransitionalLayer" class="form-control">
+						<option value="0" {% if profile.TransitionalLayer==0 %}selected{% endif %} translate>Enable</option>
+						<option value="1" {% if profile.TransitionalLayer==1 %}selected{% endif %} translate>Disable</option>
+					</select>
+				</div>
+			</div>
+
+			<!-- Bottom Layer Settings -->
+			<div class="col-md-6 i_basic i_option" style="padding-left:0px; padding-top:30px;">
+				<div class="col-md-12 i_basic i_option">
+					<div class="col-md-6 i_basic i_option" style="padding-left:0px;">
+						<h5><span translate><strong>Bottom Layer Settings</strong></span></h5>
+					</div>
+				</div>
+				<div class="col-md-12 i_basic i_option" style="padding-top:15px;">
+					<div class="col-md-5 i_burnin i_option">
+						<label for="SupportCureTime"><translate>Bottom Exposure Time <b>(s)</b></translate></label>
+					</div>
+					<div class="col-md-4 i_burnin i_option">
+						<input class="form-control" value="{{profile.SupportCureTime}}" name="SupportCureTime" id="SupportCureTime" step="0.0001" type="number" required>
+					</div>
+					<div class="clearfix "></div>
+				</div>
+				<div class="col-md-12 i_basic i_option" style="padding-top: 30px;">
+					<div class="col-md-5 i_burnin i_option">
+						<label for="SupportWaitBeforePrint"><translate>Bottom Wait Before Print <b>(s)</b></translate></label>
+					</div>
+					<div class="col-md-4 i_burnin i_option text-nowrap">
+						<input class="form-control" value='{{profile.SupportWaitBeforePrint}}' name="SupportWaitBeforePrint" step="0.01" id="SupportWaitBeforePrint" type="number" required>
+					</div>
+					<div class="clearfix "></div>
+				</div>
+				<div class="col-md-12 i_basic i_option">
+					<div class="col-md-5 i_burnin i_option">
+						<label for="SupportWaitAfterPrint"><translate>Bottom Wait After Print <b>(s)</b></translate></label>
+					</div>
+					<div class="col-md-4 i_burnin i_option text-nowrap">
+						<input class="form-control" value="{{profile.SupportWaitAfterPrint}}" name="SupportWaitAfterPrint" id="SupportWaitAfterPrint" step="0.01" type="number" required>
+					</div>
+					<div class="clearfix "></div>
+				</div>
+				<div class="col-md-12 i_basic i_option">
+					<div class="col-md-5 i_burnin i_option">
+						<label for="SupportTopWait"><translate>Bottom Wait After Lift <b>(s)</b></translate></label>
+					</div>
+					<div class="col-md-4 i_burnin i_option text-nowrap">
+						<input class="form-control" value="{{profile.SupportTopWait}}" name="SupportTopWait" step="0.01" id="SupportTopWait" type="number" required>
+					</div>
+					<div class="clearfix "></div>
+				</div>
+				<div class="col-md-12 i_basic i_option" style="padding-top: 30px;">
+					<div class="col-md-5 i_burnin i_option">
+						<label for="SupportWaitHeight"><translate>Bottom Lift Distance <b>(mm)</b></translate></label>
+					</div>
+					<div class="col-md-4 i_burnin i_option text-nowrap">
+						<input class="form-control" value="{{profile.SupportWaitHeight}}" name="SupportWaitHeight" step="0.001" id="SupportWaitHeight" type="number" required>
+					</div>
+					<div class="clearfix "></div>
+				</div>
+			</div>
+
+
+
+			<!-- Normal Layers -->
+			<div class="col-md-6 i_basic i_option" style="padding-left:0px; padding-top:30px;">
+				<div class="col-md-12 i_basic i_option">
+					<div class="col-md-6 i_basic i_option" style="padding-left:0px;">
+						<h5><span translate><strong>Normal Layer Settings</strong></span></h5>
+					</div>
+				</div>
+				<div class="col-md-12 i_basic i_option" style="padding-top:15px;">
+					<div class="col-md-5 i_burnin i_option">
+						<label for="SupportCureTime"><translate>Exposure Time <b>(s)</b></translate></label>
+					</div>
+					<div class="col-md-4 i_burnin i_option">
+						<input class="form-control" value="{{profile.SupportCureTime}}" name="SupportCureTime" id="SupportCureTime" step="0.0001" type="number" required>
+					</div>
+					<div class="clearfix "></div>
+				</div>
+				<div class="col-md-12 i_basic i_option" style="padding-top: 30px;">
+					<div class="col-md-5 i_burnin i_option">
+						<label for="WaitBeforePrint"><translate>Wait Before Print <b>(s)</b></translate></label>
+					</div>
+					<div class="col-md-4 i_burnin i_option text-nowrap">
+						<input class="form-control" value='{{profile.WaitBeforePrint}}' name="WaitBeforePrint" step="0.01" id="WaitBeforePrint" type="number" required>
+					</div>
+					<div class="clearfix "></div>
+				</div>
+				<div class="col-md-12 i_basic i_option">
+					<div class="col-md-5 i_burnin i_option">
+						<label for="WaitAfterPrint"><translate>Wait After Print <b>(s)</b></translate></label>
+					</div>
+					<div class="col-md-4 i_burnin i_option text-nowrap">
+						<input class="form-control" value="{{profile.WaitAfterPrint}}" name="WaitAfterPrint" id="WaitAfterPrint" step="0.01" type="number" required>
+					</div>
+					<div class="clearfix "></div>
+				</div>
+				<div class="col-md-12 i_basic i_option">
+					<div class="col-md-5 i_burnin i_option">
+						<label for="TopWait"><translate>Wait After Lift <b>(s)</b></translate></label>
+					</div>
+					<div class="col-md-4 i_burnin i_option text-nowrap">
+						<input class="form-control" value="{{profile.TopWait}}" name="TopWait" step="0.01" id="TopWait" type="number" required>
+					</div>
+					<div class="clearfix "></div>
+				</div>
+				<div class="col-md-12 i_basic i_option" style="padding-top: 30px;">
+					<div class="col-md-5 i_burnin i_option">
+						<label for="WaitHeight"><translate>Normal Lift Distance <b>(mm)</b></translate></label>
+					</div>
+					<div class="col-md-4 i_burnin i_option text-nowrap">
+						<input class="form-control" value="{{profile.WaitHeight}}" name="WaitHeight" id="WaitHeight" step="0.001" type="number" required>
+					</div>
+					<div class="clearfix "></div>
+				</div>
+			</div>
+
+			<div class="col-md-12 i_basic i_option" style="padding-top:30px;">
+				<div class="col-md-6 i_basic i_option" style="padding-left: 0px;">
+					<h5><span translate><strong>Slicer Options</strong></span></h5>
+				</div>
+			</div>
+
+			<div class="col-md-12 i_basic i_option" style="padding-top:30px;">
+				<div class="col-md-3 i_basic i_option" style="padding-left: 0px;">
+					<label for="AntiAlias">
+						<translate>Anti-aliasing</translate>{{helpPage("https://docs.nano3dtech.com/manual/print-quality/#anti-aliasing")}}{{regenerateRequired()}}
+					</label>
+					<select name="AntiAlias" id="AntiAlias" class="form-control">
+						<option value="0" {% if profile.AntiAlias==0 %}selected{% endif %} translate>Enable</option>
+						<option value="1" {% if profile.AntiAlias==1 %}selected{% endif %} translate>Disable</option>
+					</select>
+				</div>
+				<div class="col-md-3 i_basic i_option" style="padding-left: 0px;" data-condition="#PrinterType != 2 && ['i_burnin','i_slicing'].includes(#scategory)">
+					<label for="ElephantMidExposure">
+						<translate>Elephant Foot Middle Exposure</translate> {{helpPage("https://docs.nano3dtech.com/manual/elephant-foot/")}}
+					</label>
+					<select name="ElephantMidExposure" id="ElephantMidExposure" class="form-control">
+						<option value="0" {% if profile.ElephantMidExposure==0 %}selected{% endif %} translate>Disable</option>
+						<option value="1" {% if profile.ElephantMidExposure==1 %}selected{% endif %} translate>Enable</option>
+					</select>
+				</div>
+				<div class="clearfix "></div>
+			</div>
+			</div>
+		</div>
+		</div>
+	</form>
 	<br>
 	<br>
 </div>
