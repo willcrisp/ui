@@ -23,10 +23,13 @@ $("#expertMode").change(function () {
   localStorage.setItem("expertModeCheck", JSON.stringify(expertModeCheck));
 
   if (expertModeCheck) {
-    $(".expertMode").removeClass("hidden");
     $(".notExpertMode").addClass("hidden");
+    $(".expertMode").removeClass("hidden");
   } else {
-    $(".notExpertMode").removeClass("hidden");
     $(".expertMode").addClass("hidden");
+    $(".notExpertMode").removeClass("hidden");
+  }
+  if (window.location.hash) {
+    history.pushState({}, document.title, window.location.href.split('#')[0]);
   }
 });

@@ -613,7 +613,7 @@
 					<h5><span translate><strong>Layer Details</strong></span></h5>
 				</div>
 			</div>
-
+			
 			<div class="col-md-4 i_basic i_option" style="padding-top:15px;">
 				<div class="col-md-6 i_normal i_option">
 					<label for="Depth"><translate>Layer Thickness <b>(μm)</b></translate></label>
@@ -707,10 +707,10 @@
 				</div>
 				<div class="col-md-12 i_basic i_option" style="padding-top:15px;">
 					<div class="col-md-5 i_burnin i_option">
-						<label for="SupportCureTime"><translate>Exposure Time <b>(s)</b></translate></label>
+						<label for="CureTime"><translate>Exposure Time <b>(s)</b></translate></label>
 					</div>
 					<div class="col-md-4 i_burnin i_option">
-						<input class="form-control" value="{{profile.SupportCureTime}}" name="SupportCureTime" id="SupportCureTime" step="0.0001" type="number" required>
+						<input class="form-control" value="{{profile.CureTime}}" name="CureTime" id="CureTime" step="0.0001" type="number" required>
 					</div>
 					<div class="clearfix "></div>
 				</div>
@@ -752,12 +752,12 @@
 				</div>
 			</div>
 
+			<!-- Slicer Options -->
 			<div class="col-md-12 i_basic i_option" style="padding-top:30px;">
 				<div class="col-md-6 i_basic i_option" style="padding-left: 0px;">
 					<h5><span translate><strong>Slicer Options</strong></span></h5>
 				</div>
 			</div>
-
 			<div class="col-md-12 i_basic i_option" style="padding-top:30px;">
 				<div class="col-md-3 i_basic i_option" style="padding-left: 0px;">
 					<label for="AntiAlias">
