@@ -121,8 +121,8 @@
 {% macro icon(ic) %}
 <svg viewBox="0 0 16 16" class="bi" fill="currentColor" xmlns="http://www.w3.org/2000/svg">{{ic|safe}}</svg>
 {% endmacro %}
-{% macro setting_cat(name,text,ic,class,expertMode) %}
-<a href="#" class="setting-cat inverse {{expertMode}}" data-related="{{class}}">
+{% macro setting_cat(name,text,ic,class) %}
+<a href="#" class="setting-cat inverse" data-related="{{class}}">
 	<div class="glyphicon-ring">{{ icon(ic) }}</div>
 	<h4>{{name|safe}}</h4>
 	<span class="desc">{{text|safe}}</span>
@@ -146,6 +146,7 @@
 
 	<!-- Custom styles for this template -->
 	<link href='/static/css/main.css?{{version}}' rel="stylesheet">
+	<link href='/static/css/athena.css' rel="stylesheet">
 	<title>{% if title %}{{ title }}{% endif %}</title>
 	{% block head %} {% endblock %}
 </head>
@@ -170,10 +171,10 @@
 	<script src='/static/js/conditionize.flexible.jquery.min.js'></script>	
 	<script src='/static/js/main.js?{{version}}'></script>
 	<script src='/static/js/formula.js'></script>
-	<script src='/static/js/expert-mode.js'></script>
 	<script src='/static/js/slicer.js'></script>
 	<script src='/static/js/preview.js'></script>
 	<script src='/static/js/po.js'></script>
+	<script src='/static/js/athena.js'></script>
 	{% block js %} {% endblock %} {% block tail %} {% endblock %}
 	<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">

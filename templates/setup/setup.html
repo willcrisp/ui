@@ -84,6 +84,15 @@
 					<option value="3" {% if PrinterType==3 %}selected{% endif %} translate>High Resolution Printer</option>
 				</select>
 			</div>
+			<div class="col-md-4 i_basic i_option">
+				<label for="Name">
+					<translate>Expert Mode</translate>
+				</label>
+				<select class="form-control" name="ViewMode" id="ViewMode">
+					<option value="1" {% if ViewMode==1 %}selected{% endif %} translate>Expert</option>
+					<option value="0" {% if ViewMode==0 %}selected{% endif %} translate>Basic</option>
+				</select>
+			</div>
 			<div class="col-md-4 i_basic i_appearance i_option">
 				<label for="Lang">
 					<translate>Language</translate>

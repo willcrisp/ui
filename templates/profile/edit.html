@@ -4,17 +4,17 @@
 	<div class="alert alert-danger" role="alert">{{msg}}</div>
 	{% endif %}
 	<input type="hidden" id="scategory" value="">
-	<form action="" method="post" class="edit-page expertMode" id="setup">
+	<form action="" method="post" class="edit-page {% if viewMode == 0 %}hidden{% endif %}" id="setup">
 		<br>
 		<div class="row">
 			<div class="col-md-12 setup-categories profiles">
 				{{ setting_cat("<translate>Basic Details</translate>","<translate>Resin name, price, description</translate>",gear_icon,"i_basic") }}
 				{{ setting_cat("<translate>Slicer Options</translate>","<translate>Prepare models for print, erode, dimming, 3D AA, AA, resolution, dimming, hollowing, mask</translate>", glob_icon, "i_slicing") }}
-				{{ setting_cat("<translate>Before Layer</translate>","<translate>Move to layer, movement speed, slow section, sending code</translate>",axis_icon,"i_movetolayer","expertMode") }}
+				{{ setting_cat("<translate>Before Layer</translate>","<translate>Move to layer, movement speed, slow section, sending code</translate>",axis_icon,"i_movetolayer") }}
 				{{ setting_cat("<translate>Burn-in Layer</translate>","<translate>Burin-in layers count, cure time, lift, erode</translate>",burnin_icon,"i_burnin") }}
 				{{ setting_cat("<translate>Normal Layer</translate>","<translate>Normal layers count, cure time, lift, erode</translate>",normal_icon,"i_normal") }}
 				{{ setting_cat("<translate>After Layer</translate>","<translate>Lift after print, wait after lift, sending code</translate>",axis_icon,"i_moveafterprint") }}
-				{{ setting_cat("<translate>Override Machine Settings</translate>","<translate>Resolution, codes, mask</translate>",pen_icon,"i_override","expertMode") }}
+				{{ setting_cat("<translate>Override Machine Settings</translate>","<translate>Resolution, codes, mask</translate>",pen_icon,"i_override") }}
 			</div>
 			<div class="col-md-12 selected-cat">	
 			</div>
@@ -578,7 +578,9 @@
 		{{ customInputs(inputs,profile.CustomValues,1)}}
 		<button type="submit" class="btn btn-success" translate>Save</button> &nbsp; 
 	</form>	
-	<form action="" method="post" class="edit-page notExpertMode" id="setup2">
+
+	<!-- ************************** ATHENA SIMPLE RESIN PAGE -->
+	<form action="" method="post" class="edit-page {% if viewMode == 1 %}hidden{% endif %}" id="setup2">
 		<div class="row flex-row" id="options">
 			<div class="col-md-12 i_basic i_option">
 					<h3><span translate>Details</span>
@@ -608,48 +610,39 @@
 			</div>
 
 			<!-- Layer Detils -->
-			<div class="col-md-12 i_basic i_option" style="padding-top:30px;">
+			<div class="col-md-12 i_basic i_option" style="padding-top:10px;">
 				<div class="col-md-6 i_basic i_option" style="padding-left: 0px;">
 					<h5><span translate><strong>Layer Details</strong></span></h5>
 				</div>
 			</div>
 			
-			<div class="col-md-4 i_basic i_option" style="padding-top:15px;">
-				<div class="col-md-6 i_normal i_option">
-					<label for="Depth"><translate>Layer Thickness <b>(μm)</b></translate></label>
-				</div>
-				<div class="col-md-6 i_normal i_option text-right">
-					<input class="form-control" value="{{profile.Depth}}" name="Depth" id="Depth" step="0.01" type="number" required>
-				</div>
+			<div class="col-md-2 col-sm-3 i_basic i_option" style="padding-top:5px;">
+				<label for="Depth"><translate>Layer Thickness <b>(μm)</b></translate></label>
+				<input class="form-control" value="{{profile.Depth}}" name="Depth" id="Depth" step="0.01" type="number" required>
 			</div>
-			<div class="col-md-4 i_basic i_option" style="padding-top:15px;">
-				<div class="col-md-6 i_burnin i_option">
-					<label for="SupportLayerNumber"><translate>Number of Burn-in Layers</translate></label>
-				</div>
-				<div class="col-md-6 i_burnin i_option">
-					<input class="form-control" value="{{profile.SupportLayerNumber}}" name="SupportLayerNumber" id="SupportLayerNumber" type="number" required>
-				</div>
+			<div class="col-md-2 col-sm-3 i_basic i_option" style="padding-top:5px;">
+				<label for="SupportLayerNumber">
+					<translate>Number of Burin-in Layers</translate>
+				</label>
+				<input class="form-control" value="{{profile.SupportLayerNumber}}" name="SupportLayerNumber"
+					id="SupportLayerNumber" type="number" required>
 			</div>
-			<div class="col-md-4 i_basic i_option" style="padding-top:15px;">
-				<div class="col-md-6 i_burnin i_option">
-					<label for="TransitionalLayer"><translate>Transitional Layer</translate></label>
-				</div>
-				<div class="col-md-6 i_burnin i_option">
-					<select name="TransitionalLayer" id="TransitionalLayer" class="form-control">
-						<option value="0" {% if profile.TransitionalLayer==0 %}selected{% endif %} translate>Enable</option>
-						<option value="1" {% if profile.TransitionalLayer==1 %}selected{% endif %} translate>Disable</option>
-					</select>
-				</div>
+			<div class="col-md-2 col-sm-3 i_basic i_option" style="padding-top:5px;">
+				<label for="TransitionalLayer"><translate>Transitional Layer</translate></label>
+				<select name="TransitionalLayer" id="TransitionalLayer" class="form-control">
+					<option value="0" {% if profile.TransitionalLayer==0 %}selected{% endif %} translate>Enable</option>
+					<option value="1" {% if profile.TransitionalLayer==1 %}selected{% endif %} translate>Disable</option>
+				</select>
 			</div>
-
+			<div class="col-md-6 i_basic i_option" > </div>
 			<!-- Bottom Layer Settings -->
-			<div class="col-md-6 i_basic i_option" style="padding-left:0px; padding-top:30px;">
+			<div class="col-md-6 i_basic i_option" style="padding-left:0px; padding-top:10px;">
 				<div class="col-md-12 i_basic i_option">
 					<div class="col-md-6 i_basic i_option" style="padding-left:0px;">
 						<h5><span translate><strong>Bottom Layer Settings</strong></span></h5>
 					</div>
 				</div>
-				<div class="col-md-12 i_basic i_option" style="padding-top:15px;">
+				<div class="col-md-12 i_basic i_option" style="padding-top:5px;">
 					<div class="col-md-5 i_burnin i_option">
 						<label for="SupportCureTime"><translate>Bottom Exposure Time <b>(s)</b></translate></label>
 					</div>
@@ -658,7 +651,7 @@
 					</div>
 					<div class="clearfix "></div>
 				</div>
-				<div class="col-md-12 i_basic i_option" style="padding-top: 30px;">
+				<div class="col-md-12 i_basic i_option" style="padding-top: 10px;">
 					<div class="col-md-5 i_burnin i_option">
 						<label for="SupportWaitBeforePrint"><translate>Bottom Wait Before Print <b>(s)</b></translate></label>
 					</div>
@@ -685,7 +678,7 @@
 					</div>
 					<div class="clearfix "></div>
 				</div>
-				<div class="col-md-12 i_basic i_option" style="padding-top: 30px;">
+				<div class="col-md-12 i_basic i_option" style="padding-top: 10px;">
 					<div class="col-md-5 i_burnin i_option">
 						<label for="SupportWaitHeight"><translate>Bottom Lift Distance <b>(mm)</b></translate></label>
 					</div>
@@ -699,13 +692,13 @@
 
 
 			<!-- Normal Layers -->
-			<div class="col-md-6 i_basic i_option" style="padding-left:0px; padding-top:30px;">
+			<div class="col-md-6 i_basic i_option" style="padding-left:0px; padding-top:10px;">
 				<div class="col-md-12 i_basic i_option">
 					<div class="col-md-6 i_basic i_option" style="padding-left:0px;">
 						<h5><span translate><strong>Normal Layer Settings</strong></span></h5>
 					</div>
 				</div>
-				<div class="col-md-12 i_basic i_option" style="padding-top:15px;">
+				<div class="col-md-12 i_basic i_option" style="padding-top:5px;">
 					<div class="col-md-5 i_burnin i_option">
 						<label for="CureTime"><translate>Exposure Time <b>(s)</b></translate></label>
 					</div>
@@ -714,7 +707,7 @@
 					</div>
 					<div class="clearfix "></div>
 				</div>
-				<div class="col-md-12 i_basic i_option" style="padding-top: 30px;">
+				<div class="col-md-12 i_basic i_option" style="padding-top: 10px;">
 					<div class="col-md-5 i_burnin i_option">
 						<label for="WaitBeforePrint"><translate>Wait Before Print <b>(s)</b></translate></label>
 					</div>
@@ -741,7 +734,7 @@
 					</div>
 					<div class="clearfix "></div>
 				</div>
-				<div class="col-md-12 i_basic i_option" style="padding-top: 30px;">
+				<div class="col-md-12 i_basic i_option" style="padding-top: 10px;">
 					<div class="col-md-5 i_burnin i_option">
 						<label for="WaitHeight"><translate>Normal Lift Distance <b>(mm)</b></translate></label>
 					</div>
@@ -753,12 +746,12 @@
 			</div>
 
 			<!-- Slicer Options -->
-			<div class="col-md-12 i_basic i_option" style="padding-top:30px;">
+			<div class="col-md-12 i_basic i_option" style="padding-top:10px;">
 				<div class="col-md-6 i_basic i_option" style="padding-left: 0px;">
 					<h5><span translate><strong>Slicer Options</strong></span></h5>
 				</div>
 			</div>
-			<div class="col-md-12 i_basic i_option" style="padding-top:30px;">
+			<div class="col-md-12 i_basic i_option" style="padding-top:5px;">
 				<div class="col-md-3 i_basic i_option" style="padding-left: 0px;">
 					<label for="AntiAlias">
 						<translate>Anti-aliasing</translate>{{helpPage("https://docs.nano3dtech.com/manual/print-quality/#anti-aliasing")}}{{regenerateRequired()}}
@@ -782,6 +775,23 @@
 			</div>
 		</div>
 		</div>
+		<input value="{{profile.Color}}" name="Color" type="hidden">
+		<input value="{{profile.ShieldDuringCure}}" name="ShieldDuringCure" type="hidden">
+		<input value="{{profile.DynamicWaitAfterLift}}" name="DynamicWaitAfterLift" type="hidden">
+		<input value="{{profile.LowQualitySkipPerLayer}}" name="LowQualitySkipPerLayer" type="hidden">
+		<input value="{{profile.LowQualityCureTime}}" name="LowQualityCureTime" type="hidden">
+		<input value="{{profile.ShutterOpenGcode}}" name="ShutterOpenGcode" type="hidden">
+		<input value="{{profile.ShutterCloseGcode}}" name="ShutterCloseGcode" type="hidden">
+		<input type="hidden" name="SupportDepth" value="{{profile.SupportDepth}}">
+		<input type="hidden" id="PrinterType" value="{{config.PrinterType}}">
+		<input type="hidden" id="DirectControl" value="{{config.ZAxisPin}}">
+		<input type="hidden" id="MYRes" value="{{config.YRes}}">
+		<input type="hidden" id="MXRes" value="{{config.XYRes}}">
+		<input value="{{profile.JumpHeight}}" name="JumpHeight" type="hidden">			
+		<input value="{{profile.JumpPerLayer}}" name="JumpPerLayer" type="hidden">
+		<input value="{{profile.XYResPerc}}" name="XYResPerc" id="XYResPerc" type="hidden">
+		<input type="hidden" name="UpdateCustomInput" value="true">
+		{{ customInputs(inputs,profile.CustomValues,1)}}
 	</form>
 	<br>
 	<br>
