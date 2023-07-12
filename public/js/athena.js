@@ -9,17 +9,11 @@ $('#expertModeCheckbox').change(function() {
 
 
 //************** Calibrations Functions  */
-var currentPosition = 0;
-var movement = 1; // Default movement value is 1 mm
+
+var movement = 1000; // Default movement value is 1 mm
 
 function moveZAxis(direction) {
-  if (direction === "up") {
-    currentPosition += movement;
-  } else if (direction === "down") {
-    currentPosition -= movement;
-  }
-  console.log("Current position: " + currentPosition + " mm");
-  // Here, you can send the currentPosition value to your backend or perform any desired action
+  console.log(`/z-axis/move/${direction}/micron/${movement}`)
 }
 
 function updateMovementButtons() {
@@ -36,17 +30,17 @@ $("#btnDown").click(function() {
   moveZAxis("down");
 });
 
-$("#btnMove01").click(function() {
-  movement = 0.1;
+$("#btnMove100").click(function() {
+  movement = 100;
   updateMovementButtons();
 });
 
-$("#btnMove1").click(function() {
-  movement = 1;
+$("#btnMove1000").click(function() {
+  movement = 1000;
   updateMovementButtons();
 });
 
-$("#btnMove10").click(function() {
-  movement = 10;
+$("#btnMove10000").click(function() {
+  movement = 10000;
   updateMovementButtons();
 });
