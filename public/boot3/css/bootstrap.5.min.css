@@ -2568,9 +2568,9 @@ output {
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .form-control:focus {
-  border-color: #66afe9;
+  border-color: #F5C645;
   outline: 0;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(96, 78, 27, 0.6);
 }
 .form-control::-moz-placeholder {
   color: #b3b3b3;
@@ -2590,6 +2590,7 @@ output {
 .form-control[readonly],
 fieldset[disabled] .form-control {
   background-color: #eeeeee;
+  color: #000;
   opacity: 1;
 }
 .form-control[disabled],
@@ -2736,7 +2737,7 @@ select[multiple].input-sm {
   height: 57px;
   padding: 14px 16px;
   font-size: 20px;
-  line-height: 1.F5F5F53;
+  line-height: 1.333333;
   border-radius: 6px;
 }
 select.input-lg {
@@ -2751,7 +2752,7 @@ select[multiple].input-lg {
   height: 57px;
   padding: 14px 16px;
   font-size: 20px;
-  line-height: 1.F5F5F53;
+  line-height: 1.33333;
   border-radius: 6px;
 }
 .form-group-lg select.form-control {
@@ -2767,7 +2768,7 @@ select[multiple].input-lg {
   min-height: 42px;
   padding: 15px 16px;
   font-size: 20px;
-  line-height: 1.F5F5F53;
+  line-height: 1.333333;
 }
 .has-feedback {
   position: relative;
@@ -3393,7 +3394,7 @@ fieldset[disabled] .btn-link:focus {
 .btn-group-lg > .btn {
   padding: 14px 16px;
   font-size: 20px;
-  line-height: 1.F5F5F53;
+  line-height: 1.333333;
   border-radius: 6px;
 }
 .btn-sm,
@@ -3785,7 +3786,7 @@ tbody.collapse.in {
   height: 57px;
   padding: 14px 16px;
   font-size: 20px;
-  line-height: 1.F5F5F53;
+  line-height: 1.333333;
   border-radius: 6px;
 }
 select.input-group-lg > .form-control,
@@ -4717,7 +4718,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination-lg > li > span {
   padding: 14px 16px;
   font-size: 20px;
-  line-height: 1.F5F5F53;
+  line-height: 1.333333;
 }
 .pagination-lg > li:first-child > a,
 .pagination-lg > li:first-child > span {
@@ -5028,7 +5029,7 @@ a.thumbnail.active {
   color: #e6e6e6;
 }
 .alert-danger {
-  color: #3B3B3B;
+  color: #fff;
   background-color: #d9534f;
   border-color: #d9534f;
 }

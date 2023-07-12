@@ -107,7 +107,7 @@
 			<div style="width: 0%" class="progress-bar progress-bar-main progress-bar-warning"></div>
 		</div>
 		<button type="submit" class="btn btn-success" translate>Submit</button>
-		<button type="button" class="btn btn-success" id="browser_slice" disabled="disabled" translate>Slice on Browser and Submit</button>
+		<button type="button" class="btn btn-success {% if viewMode == 0 %}hidden{% endif %}" id="browser_slice" disabled="disabled" translate>Slice on Browser and Submit</button>
 	</form>
 	{% if isARM %}
 	<div class="row">
