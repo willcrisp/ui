@@ -6,10 +6,22 @@ $("#expertModeCheckbox").change(function () {
 
 //************** Resin Profile Functions  */
 
-function toggleDynamicWaitBottom() {
-  var inputElement = document.getElementById("SupportWaitBeforePrint");
-  inputElement.value = '6.90'
-}
+$('#dynamicSupportWaitCheckbox').change(function() {
+  if ($(this).is(':checked')) {
+    $('#SupportWaitBeforePrintSimple').val(0).prop('disabled', true);
+  } else {
+    $('#SupportWaitBeforePrintSimple').prop('disabled', false);
+  }
+});
+
+$('#dynamicWaitCheckbox').change(function() {
+  if ($(this).is(':checked')) {
+    $('#WaitBeforePrintSimple').val(0).prop('disabled', true);
+  } else {
+    $('#WaitBeforePrintSimple').prop('disabled', false);
+  }
+});
+
 
 //************** Calibrations Functions  */
 

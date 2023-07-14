@@ -656,12 +656,12 @@
 						<label for="SupportWaitBeforePrint"><translate>Bottom Wait Before Print <b>(s)</b></translate></label>
 					</div>
 					<div class="col-md-4 i_burnin i_option text-nowrap">
-						<input class="form-control" value="{{profile.SupportWaitBeforePrint}}" name="SupportWaitBeforePrint" step="0.01" id="SupportWaitBeforePrint" type="number" required>
+						<input class="form-control" value="{{profile.SupportWaitBeforePrint}}" name="SupportWaitBeforePrint" step="0.01" id="SupportWaitBeforePrintSimple" type="number" required>
 					</div>
 					<div class="col-md-3 i_burnin i_option" style="padding: 0px;">
 						<div class="checkbox checkbox-inline checkbox-sm" style="padding-left: 0px;">
 							<label>
-								<input type="checkbox" id="dynamicWaitCheckbox" style="margin-top: -10px;" onclick="toggleDynamicWaitBottom()"> Dynamic Wait{{profile.SupportWaitBeforePrint}}
+								<input type="checkbox" id="dynamicSupportWaitCheckbox" style="margin-top: -10px;"> Dynamic Wait
 							</label>
 						</div>
 					</div>
@@ -718,12 +718,12 @@
 						<label for="WaitBeforePrint"><translate>Wait Before Print <b>(s)</b></translate></label>
 					</div>
 					<div class="col-md-4 i_burnin i_option text-nowrap">
-						<input class="form-control" value='{{profile.WaitBeforePrint}}' name="WaitBeforePrint" step="0.01" id="WaitBeforePrint" type="number" required>
+						<input class="form-control" value='{{profile.WaitBeforePrint}}' name="WaitBeforePrint" step="0.01" id="WaitBeforePrintSimple" type="number" required>
 					</div>
 					<div class="col-md-3 i_burnin i_option" style="padding: 0px;">
 						<div class="checkbox checkbox-inline checkbox-sm" style="padding-left: 0px;">
 							<label>
-								 <input type="checkbox" style="margin-top: -10px;">Dynamic Wait
+								 <input type="checkbox" id="dynamicWaitCheckbox" style="margin-top: -10px;">Dynamic Wait
 							</label>
 						</div>
 					</div>
