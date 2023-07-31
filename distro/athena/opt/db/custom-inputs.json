@@ -1,0 +1,74 @@
+[
+	{
+		"ID": 0,
+		"Place": 1,
+		"Type": 1,
+		"Name": "DwFlowEndSlope",
+		"Title": "DynamicWait Flow End Slope",
+		"Note": "Force slope when the wait should finish",
+		"Placeholder": "",
+		"Unit": "N",
+		"Min": 0,
+		"Max": 100
+	},
+	{
+		"ID": 1,
+		"Place": 0,
+		"Type": 1,
+		"Name": "FssScale",
+		"Title": "Scalar value to apply to all force measurements",
+		"Note": "Scaling of the force sensor readings",
+		"Placeholder": "",
+		"Unit": "",
+		"Min": -100,
+		"Max": 100
+	},
+	{
+		"ID": 2,
+		"Place": 1,
+		"Type": 1,
+		"Name": "PdPeelEndSlope",
+		"Title": "PeelDetection Slope End",
+		"Note": "Slope when the peel ends",
+		"Placeholder": "",
+		"Unit": "N",
+		"Min": 0,
+		"Max": 100
+	},
+	{
+		"ID": 3,
+		"Place": 1,
+		"Type": 1,
+		"Name": "PdPeelStartSlope",
+		"Title": "PeelDetection Slope Start",
+		"Note": "Slope when the peel starts",
+		"Placeholder": "",
+		"Unit": "N",
+		"Min": 0,
+		"Max": 100
+	},
+	{
+		"ID": 4,
+		"Place": 1,
+		"Type": 1,
+		"Name": "CdThreshold",
+		"Title": "CrashDetection Threshols",
+		"Note": "Threshold for crash detection",
+		"Placeholder": "",
+		"Unit": "N",
+		"Min": 0,
+		"Max": 2000
+	},
+	{
+		"ID": 5,
+		"Place": 1,
+		"Type": 1,
+		"Name": "UvPwmValue",
+		"Title": "UV-LED PWM Value",
+		"Note": "PWM Value for the UVLed",
+		"Placeholder": "",
+		"Unit": "",
+		"Min": 0,
+		"Max": 1
+	}
+]

@@ -1,27 +1,52 @@
-//************** Expert Mode Functions  */
-$("#expertModeCheckbox").change(function () {
+function expertModeToggle(e) {
+  var evt = e ? e : window.event;
+
+  if (evt.stopPropagation) {
+    evt.stopPropagation();
+    evt.preventDefault();
+  }
+  if (evt.cancelBubble != null) evt.cancelBubble = true;
   $.ajax({ url: "/printer/view/toggle", type: "GET", dataType: "json" });
-  window.location.reload();
-});
+  window.location.reload(true);
+}
 
 //************** Resin Profile Functions  */
 
-$('#dynamicSupportWaitCheckbox').change(function() {
-  if ($(this).is(':checked')) {
-    $('#SupportWaitBeforePrintSimple').val(0).prop('disabled', true);
+$("#dynamicSupportWaitCheckbox").change(function () {
+  if ($(this).is(":checked")) {
+    $("#SupportWaitBeforePrintSimple").val(0).prop("disabled", true);
   } else {
-    $('#SupportWaitBeforePrintSimple').prop('disabled', false);
+    $("#SupportWaitBeforePrintSimple").prop("disabled", false);
   }
 });
 
-$('#dynamicWaitCheckbox').change(function() {
-  if ($(this).is(':checked')) {
-    $('#WaitBeforePrintSimple').val(0).prop('disabled', true);
+$("#dynamicWaitCheckbox").change(function () {
+  if ($(this).is(":checked")) {
+    $("#WaitBeforePrintSimple").val(0).prop("disabled", true);
   } else {
-    $('#WaitBeforePrintSimple').prop('disabled', false);
+    $("#WaitBeforePrintSimple").prop("disabled", false);
   }
 });
 
+$("#UvPwmValuePercentSimple").change(function () {
+  //clamp value
+  if (this.value > 100) this.value = 100;
+  if (this.value < 1) this.value = 1;
+  var percentValue = parseFloat(this.value);
+  if (!isNaN(percentValue)) {
+    var actualValue = percentValue / 100;
+    document.getElementById("UvPwmValueSimple").value = actualValue.toFixed(2);
+  }
+});
+
+//This is used to adjust any values just for display
+document.addEventListener("DOMContentLoaded", function () {
+  var UvPwmComp = document.getElementById("UvPwmValuePercentSimple");
+  if (UvPwmComp) {
+    var scaledValue = UvPwmComp.value * 100;
+    UvPwmComp.value = scaledValue.toFixed(0);
+  }
+});
 
 //************** Calibrations Functions  */
 
