@@ -1,15 +1,3 @@
-function expertModeToggle(e) {
-  var evt = e ? e : window.event;
-
-  if (evt.stopPropagation) {
-    evt.stopPropagation();
-    evt.preventDefault();
-  }
-  if (evt.cancelBubble != null) evt.cancelBubble = true;
-  $.ajax({ url: "/printer/view/toggle", type: "GET", dataType: "json" });
-  window.location.reload(true);
-}
-
 //************** Resin Profile Functions  */
 
 $("#dynamicSupportWaitCheckbox").change(function () {

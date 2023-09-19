@@ -85,15 +85,6 @@
 				</select>
 			</div>
 			<div class="col-md-4 i_basic i_appearance i_option">
-				<label for="ViewMode">
-					<translate>View Mode</translate>
-				</label>
-				<select class="form-control" name="ViewMode" id="ViewMode">
-					<option value="0" {% if ViewMode==0 %}selected{% endif %} translate>Basic</option>
-					<option value="1" {% if ViewMode==1 %}selected{% endif %} translate>Expert</option>
-				</select>
-			</div>
-			<div class="col-md-4 i_basic i_appearance i_option">
 				<label for="Lang">
 					<translate>Language</translate>
 				</label>
@@ -108,7 +99,15 @@
 					<option value="tr" {% if Lang=="tr" %}selected{% endif %} translate>Turkish</option>
 					<option value="ru" {% if Lang=="ru" %}selected{% endif %} translate>Russian</option>
 				</select>
-
+			</div>
+			<div class="col-md-4 i_basic i_appearance i_option">
+				<label for="ViewMode">
+					<translate>View Mode</translate>
+				</label>
+				<select class="form-control" name="ViewMode" id="ViewMode">
+					<option value="0" {% if ViewMode==0 %}selected{% endif %} translate>Basic</option>
+					<option value="1" {% if ViewMode==1 %}selected{% endif %} translate>Expert</option>
+				</select>
 			</div>
 			<div class="col-md-4 i_appearance i_option">
 				<label for="Theme">
@@ -118,7 +117,7 @@
 					<option value="0" {% if Theme==0 %}selected{% endif %} translate>Blue / Dark</option>
 					<option value="1" {% if Theme==1 %}selected{% endif %} translate>Blue / Light</option>
 					<option value="2" {% if Theme==2 %}selected{% endif %} translate>Black / Light</option>
-					<option value="3" {% if Theme==3 %}selected{% endif %} translate>Athena / Dark</option>
+					<option value="3" {% if Theme==3 %}selected{% endif %} translate>Brown / Light</option>
 					<option value="4" {% if Theme==4 %}selected{% endif %} translate>Black / Dark</option>
 				</select>
 
@@ -442,8 +441,8 @@
 					<translate>Display Controller</translate> 
 				</label>
 				<select class="form-control" name="DisplayController" id="DisplayController">
-					<option value="0" {% if DisplayController==0 %}selected{% endif %} translate>Normal</option>
-					<option value="1" {% if DisplayController==1 %}selected{% endif %} translate>Non-Standard Monochrome</option>
+					<option value="0" {% if ConfigSlicerOptions.DisplayController==0 %}selected{% endif %} translate>Normal</option>
+					<option value="1" {% if ConfigSlicerOptions.DisplayController==1 %}selected{% endif %} translate>Non-Standard Monochrome</option>
 				</select>
 			</div>
 			<div class="col-md-4 i_display i_slicing i_option i_lock">
@@ -597,7 +596,7 @@
 					<translate>Light Output Formula</translate> <span class="label label-default"
 						translate>Percentage</span>  {{helpPage("https://docs.nano3dtech.com/manual/code/#light-output")}} {{formulaModal()}}
 				</label>
-				<input class="form-control" value="{{LightOutputFormula}}" name="LightOutputFormula"
+				<input class="form-control" value="{{ConfigSlicerOptions.LightOutputFormula}}" name="LightOutputFormula"
 					id="LightOutputFormula">
 
 			</div>
@@ -773,12 +772,15 @@
 			</div>
 		</div>
 		<br>
+		<input type="hidden" value="{{USBDisplayBaud}}" name="USBDisplayBaud">
 		<input type="hidden" value="{{PreviewGenerate}}" name="PreviewGenerate">
 		<input type="hidden" value="{{DefaultProfile}}" name="DefaultProfile">
 		<input type="hidden" value="{{arch}}" id="arch">
 		<input type="hidden" value="{{OEMLock}}" id="OEMLock">
 		<input type="hidden" value="{{ConfigSlicerOptions.PreviewHeight}}" name="PreviewHeight">
 		<input type="hidden" value="{{ConfigSlicerOptions.PreviewWidth}}" name="PreviewWidth">
+		<input type="hidden" value="{{VatHeight}}" name="VatHeight">
+		<input type="hidden" value="{{VatWidth}}" name="VatWidth">
 		<input type="hidden" value="{{ShieldPause}}" name="ShieldPause">
 		<input type="hidden" value="{{ShieldUnpause}}" name="ShieldUnpause">
 		<input type="hidden" name="ReverseDirectionPin" value="{{ReverseDirectionPin}}">
