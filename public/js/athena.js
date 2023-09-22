@@ -83,7 +83,12 @@ $("#btnStop").click(function () {
   $.ajax({ url: `/printer/stop`, type: "GET", dataType: "json" });
 });
 
-$("#btnMoveTop").click(function () {
+$("#btnMoveHome").click(function () {
+  console.log(`/z-axis/calibrate`);
+  $.ajax({ url: `/z-axis/calibrate`, type: "GET", dataType: "json" });
+});
+
+$("#btnMovePark").click(function () {
   console.log(`/z-axis/top`);
   $.ajax({ url: `/z-axis/top`, type: "GET", dataType: "json" });
 });
