@@ -1,4 +1,6 @@
 build
+distro
+db
 public/status.json
 db/*
 public/plates/*
@@ -6,3 +8,5 @@ webserver*
 *.log
 *.sh
 nanodlp.exe
+nanodlp.exe.bak
+setup

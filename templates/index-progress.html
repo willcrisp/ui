@@ -25,7 +25,7 @@
 				</div>
 
 
-				<div class="panel-body layer_details printing-obj">
+				<div class="panel-body layer_details printing-obj" data-ratio="{{displayRatio}}">
 					<div class="row">
 						<div class="col-md-5">
 							<a class="embed-responsive embed-responsive-16by9" id="image_wrapper" href="/plate/preview">
@@ -93,13 +93,13 @@
 							<div class="printing-obj">
 								<a class="ask printing-obj" href="/printer/stop" data-ask="stop-confirm"><span class="glyphicon glyphicon-stop text-danger"></span></a>
 								<a class="ask pause-obj" href="/printer/stop" data-ask="stop-confirm"><span class="glyphicon glyphicon-stop text-danger"></span></a>
-								<a class="pause-obj" href="/printer/unpause"><span class="glyphicon glyphicon-play text-danger"></span></a>
-								<a class="printing-obj" href="/printer/pause"><span class="glyphicon glyphicon-pause text-danger"></span></a>
-								<a class="ask resume-obj" href="/printer/resume" data-ask="resume-confirm"><span class="glyphicon glyphicon-play text-danger"></span></a>
+								<a class="pause-obj" href="/printer/unpause"><span class="glyphicon glyphicon-play text-success"></span></a>
+								<a class="printing-obj" href="/printer/pause"><span class="glyphicon glyphicon-pause text-warning"></span></a>
+								<a class="ask resume-obj" href="/printer/resume" data-ask="resume-confirm"><span class="glyphicon glyphicon-play text-warning"></span></a>
 							</div>
 							<a class="ask pause-obj" href="/printer/stop" data-ask="stop-confirm"><span class="glyphicon glyphicon-stop text-danger"></span></a>
-							<a class="pause-obj" href="/printer/unpause"><span class="glyphicon glyphicon-play text-danger"></span></a>
-							<a class="ask resume-obj" href="/printer/resume" data-ask="resume-confirm"><span class="glyphicon glyphicon-play text-danger"></span></a>
+							<a class="pause-obj" href="/printer/unpause"><span class="glyphicon glyphicon-play text-success"></span></a>
+							<a class="ask resume-obj" href="/printer/resume" data-ask="resume-confirm"><span class="glyphicon glyphicon-play text-warning"></span></a>
 							{% if arch=="arm" %}
 							<a class="idle-obj ajax" href="/printer/off" name="type" data-confirm="poweroff-confirm"><span class="glyphicon glyphicon-off text-danger"></span></a>
 							<a class="idle-obj ajax" href="/printer/restart" name="type" data-confirm="restart-confirm"><span class="glyphicon glyphicon-repeat text-danger"></a>
@@ -121,7 +121,10 @@
 			</span>
 
 			<span class="idle-obj">
-				<a class="btn btn-success" href="/analytic" translate>Analytic Charts</a>
+				{% if cast==false %}
+				<a class="btn btn-success ask" href="/printer/cast" data-ask="display-confirm" translate>Start Display</a>
+				&nbsp; 
+				{% endif %}
 
 				{% if projectorPowerCycle==1 %}
 				<a class="ajax btn btn-warning idle-obj" href="/projector/off" name="type" data-confirm="projectoroff-confirm" translate>Projector

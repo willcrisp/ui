@@ -79,8 +79,8 @@ $("#btnMove100000").click(function () {
 });
 
 $("#btnStop").click(function () {
-  console.log(`/pritner/stop`);
-  $.ajax({ url: `/printer/stop`, type: "GET", dataType: "json" });
+  console.log(`/printer/force-stop`);
+  $.ajax({ url: `/printer/force-stop`, type: "GET", dataType: "json" });
 });
 
 $("#btnMoveHome").click(function () {

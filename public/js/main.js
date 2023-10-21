@@ -524,7 +524,7 @@ function update_status(){
 			layer_progress(data['PrevLayerTime'],data['LayerStartTime']);
 		}
 		if ($("#stat").length>0){
-			change_stats(data,['proc','disk','mem','uptime','proc_numb','temp']);
+			change_stats(data,['proc','disk','mem','uptime','proc_numb','temp', 'resin']);
 		}
 		update_timeline();
 		current_status_display();
