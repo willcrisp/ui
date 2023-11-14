@@ -100,6 +100,12 @@
 					<option value="ru" {% if Lang=="ru" %}selected{% endif %} translate>Russian</option>
 				</select>
 			</div>
+			<div class="col-md-4 i_basic i_option">
+				<label for="WiFiCountry">
+					<translate>WiFi Country</translate>
+				</label>
+				<input class="form-control" value="{{WiFiCountry}}" name="WiFiCountry" id="WiFiCountry" pattern="[A-Za-z]{2}|^$">
+			</div>
 			<div class="col-md-4 i_basic i_appearance i_option">
 				<label for="ViewMode">
 					<translate>View Mode</translate>

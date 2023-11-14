@@ -26,7 +26,7 @@
 {% endblock %}
 {% block content %}
 <script>
-    var dplot;
+    var dplot,plot;
     function renderChart(data,series) {
         // Remove null indicators
         for (var i=data.length-1; i>0;i--){
@@ -52,8 +52,12 @@
             series: series,
             axes: prepareAxis(series),        
         };
+        if ($("#uplot").html()!=""){
+            plot.setData(data);
+            return;
+        }
         $("#uplot").html("");
-        let uplot = new uPlot(opts, data, $("#uplot")[0]);
+        plot = new uPlot(opts, data, $("#uplot")[0]);
     }
     function waitForElement(){
         if(typeof $ !== "undefined"){
