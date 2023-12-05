@@ -13,7 +13,7 @@
 			<translate>Edit Plate</translate> "{{plate.Path}}"
 		{% endif %}
 	</legend>
-	<form method="post" class="edit-page" enctype="multipart/form-data">
+	<form method="post" class="edit-page upload-disable" enctype="multipart/form-data">
 		<div class="row flex-row">
 			{% if not plate.PlateID %}
 			<div class="col-md-4">
@@ -106,7 +106,7 @@
 		<div class="progress progress-striped hide">
 			<div style="width: 0%" class="progress-bar progress-bar-main progress-bar-warning"></div>
 		</div>
-		<button type="submit" class="btn btn-success" translate>Submit</button>
+		<button type="submit" class="btn btn-success upload-button"><translate>Submit</translate><span class="upload-progress-bar"></span></button>
 		<button type="button" class="btn btn-success {% if viewMode == 0 %}hidden{% endif %}" id="browser_slice" disabled="disabled" translate>Slice on Browser and Submit</button>
 	</form>
 	{% if isARM %}
