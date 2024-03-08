@@ -13,6 +13,8 @@ $(function(){
 		update_stat();
 		setInterval(function(){update_status();}, 1500);
 		setInterval(function(){update_stat();}, 5000);
+		setInterval(function(){display_notification();}, 2000);
+
 		$(window).focus(function() {
 			update_status();
 		});
@@ -23,6 +25,8 @@ $(function(){
 		setInterval(function () { display_console_log(); }, 5000);
 		update_status();
 		setInterval(function () { update_status(); }, 4000);
+		setInterval(function(){display_notification();}, 2000);
+
 	}
 	sortable_table_init();	
 	terminal_init();
@@ -52,6 +56,7 @@ function changelog_init() {
 	var t = $("#changelog-display");
 	if (t.length==0) return;
 	var d=t.data("changelog");
+	if (d === undefined) return;
 	var cur=t.data("current");
 	var beta=t.data("beta");
 	var stable=t.data("stable");
@@ -180,7 +185,7 @@ function profile_settings_open(t){
 
 function dashboard_init() {
 	$.get("/info", function (data) {
-		$(".nanodlp-content").html("<br>"+data);
+		// $(".nanodlp-content").html("<br>"+data);
 	});
 	$("html").delegate('#change-preview','click',function(e){
 		$(this).parent().toggleClass("toggle");
@@ -212,12 +217,12 @@ function ajax_post_init(){
 }
 
 function post_init(){
-	$('.upload-disable').submit(function(e) {
+/*	$('.upload-disable').submit(function(e) {
 		var form = $(this);
 		var submitButton = form.find('button[type="submit"]');
 		submitButton.prop('disabled', true);
 		$(".upload-progress-bar").show();
-	});
+	});*/
 }
 
 function confirm_init(){
@@ -587,7 +592,9 @@ function change_stats(data,keys){
 	});
 }
 
+display_notification.prev_msg='';
 display_notification.prev_data='';
+
 function display_notification(){	
 	$.ajax({
 		url:'/notification',
@@ -596,17 +603,130 @@ function display_notification(){
 	}).done(function(data){
 		var msg="";
 		if (data===null) return;
-		$.each(data,function(k,v){
-			msg+='<div data-notification="'+v["Timestamp"]+'" class="container notification-service alert alert-'+v["Type"]+'">'+v["Text"]
-				+'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
-				+'</div>';			
-		});
-		if (msg==display_notification.prev_data) return;
-		display_notification.prev_data=msg;
-		$(".notification-service").remove();
-		$(".navbar").after(msg);
+		
+		if(data.length > 0){
+			$.each(data,function(k,v){
+				
+				if( display_notification.prev_data === "" || v['Timestamp'] >= display_notification.prev_data['Timestamp']){
+					
+					var date = new Date();
+					date.setTime(v['Timestamp']*1000);
+
+					var hour = date.getHours();
+					var min = date.getMinutes();
+					var sec = date.getSeconds();
+
+					hour = (hour < 10 ? "0" : "") + hour;
+					min = (min < 10 ? "0" : "") + min;
+					sec = (sec < 10 ? "0" : "") + sec;
+
+					var str = hour + ":" + min + ":" + sec;
+		
+					msg='<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="modalLabelSmall" aria-hidden="false">'
+						+'<div class="modal-dialog">'
+						+'<div class="modal-content">'
+						+'<div class="modal-header">'
+						+'<h4 class="modal-title" id="modalLabelSmall"><center>'+v["Type"].toUpperCase()+'</center></h4>'
+						+'</div>' //end modal header
+						+'<div class="modal-body">'
+						+'<center>'+str+' - '+v["Text"]+'</center>'
+						+'</br>'
+						+'</div>' //end modal body
+						+'<div class="div-modal-buttons">'
+						+'<button type="button" id="btn-modal-continue" class="btn btn-info btn-mod-l"> Continue Anyways</button>'
+						+'<button type="button" id="btn-modal-cancel" class="btn btn-danger btn-mod-r"> Cancel Print</button>'
+						+'</div>' //end modal footer
+						+'</div>' //end model content
+						+'</div>' //end modal dialog
+						+'</div>'; //end modal fade
+
+					if(v["Type"] === "Error"){
+						$('#btn-modal-continue').hide();
+					}
+					display_notification.prev_data=v;
+
+
+				}
+			});
+			
+			if (msg==display_notification.prev_msg) return;
+			display_notification.prev_msg=msg;
+			$("#notificationModal").remove();
+			$(".navbar").after(msg);
+
+
+
+			$('#btn-modal-continue').click(function(){
+				try {     
+					const response = fetch('/notification/disable/'+display_notification.prev_data["Timestamp"], {
+					  method: 'get'				  
+					});
+					const response2 = fetch('/printer/unpause', {
+					  method: 'get'				  
+					});
+					console.log('Completed!', response);
+				} catch(err) {
+					console.error('Error: ${err}');
+				}
+				$('#notificationModal').modal('hide');
+
+			}); 
+			$('#btn-modal-cancel').click(function(){
+				try {     
+					const response = fetch('/notification/disable/:'+display_notification.prev_data["Timestamp"], {
+					  method: 'get'				  
+					});
+					const response2 = fetch('/api/v1/printer/printer/stop', {
+					  method: 'get'				  
+					});
+					console.log('Completed!', response);
+				} catch(err) {
+					console.error('Error: ${err}');
+				}
+				$('#notificationModal').modal('hide');
+			}); 
+			
+			$('#notificationModal').modal({backdrop: 'static', keyboard: false})  
+			$('#notificationModal').modal('show');
+			
+		
+		}else{
+			msg="";
+			$('#notificationModal').modal('hide');
+			$("#notificationModal").remove();
+		}
+		
+		
+
+
 	});
 }
+
+/*
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#smallShoes">
+Click Me
+</button>
+
+<!-- The modal -->
+<div class="modal fade" id="smallShoes" tabindex="-1" role="dialog" aria-labelledby="modalLabelSmall" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+<h4 class="modal-title" id="modalLabelSmall">Modal Title</h4>
+</div>
+
+<div class="modal-body">
+Modal content...
+</div>
+
+</div>
+</div>
+</div>
+*/
 
 function notification_close(){
 	$("body").delegate('.notification-service button','click', function (e) {
@@ -858,8 +978,14 @@ function search_init(){
 	});
 }
 
-$('#expertModeCheckbox').click(function(e) {
-	e.preventDefault();
-	$.ajax({url: '/printer/view/toggle',type: 'GET',dataType: 'json'}); 
-	window.location.reload(true);
+$("#expertModeCheckbox").click(function (e) {
+  e.preventDefault();
+  $.ajax({
+    url: "/printer/view/toggle",
+    type: "GET",
+    dataType: "json",
+    complete: () => {
+      window.location.reload(true);
+    },
+  });
 });

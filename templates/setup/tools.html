@@ -40,12 +40,17 @@
             <translate class="hide" id="terminate-confirm">Are you sure you want to terminate nanoDLP and have access to
                 terminal?</translate>
             <br>
-            <a class="ajax btn btn-warning" data-ajax="/" href="/printer/reload" translate>Disable & Stop NanoDLP DSI HMI</a>
+			
+			
+			
+            <a class="ajax btn btn-danger" data-ajax="/" href="/printer/terminate" data-confirm="terminate-confirm"
+                translate>Terminate nanoDLP</a>
+            <translate class="hide" id="terminate-confirm">Are you sure you want to terminate nanoDLP and have access to
+                terminal?</translate>
             <br>
-            <a class="ajax btn btn-warning" data-ajax="/" href="/printer/reload" translate>Enable & Start NanoDLP DSI HMI</a>
-            <br>
-            <a class="btn btn-success" href="/printer/upgrade/dsi/nanodlp-dsi.beta.tar.gz" translate>Upgrade DSI interface</a>
-            <br>
+			
+			<button id="BtnToggleHeater" class="btn btn-success" translate>Toggle Heater system</button> 		
+			
         </div>
         <div class="col-md-4">
             <h3 translate>Tools</h3>
@@ -84,21 +89,16 @@
             <translate class="hide" id="expand-confirm">Are you sure you want to expand filesystem?</translate>
             <br>
             <br>
-            {% endif %}            
-            <h1 translate>Offline Upgrade</h1>
-            <form action="/printer/upgrade/go" method="post" class="edit-page" enctype="multipart/form-data">
-                <input class="form-control" name="Upgrade" id="Upgrade" type="file" accept=".gz">
-                <br>
-                <button type="submit" class="btn btn-success" name="file" value="add" translate>Upgrade</button>
-            </form>
-            <br>
-            <br>
-            <h1 translate class="{% if viewMode == 0 %}hidden{% endif %}">Upload AVR Firmware</h1>
-            <form action="/avr/upload" method="post" class="edit-page  {% if viewMode == 0 %}hidden{% endif %}" enctype="multipart/form-data">
-                <input class="form-control" name="HexFile" id="HexFile" type="file" accept=".hex">
-                <br>
-                <button type="submit" class="btn btn-success" name="file" value="add" translate>Upload</button>
-            </form>
+            {% endif %}
+
+
+			<form action="setup/wifi/country" method="post" class="edit-page" id="toolsform">
+					<input class="form-control" name="country" id="WiFiCountryTools" pattern="[A-Za-z]{2}|^$" style="width:50%">
+					<button type="submit" class="btn btn-success" translate>Change WiFi Country</button> 
+			</form>
+
+
+			
         </div>
     </div>
 </div>
